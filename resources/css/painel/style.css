@@ -1,6 +1,5 @@
 /* Painel Arizona Pet Care — extensão visual do site: mesma paleta, tipografia e formas. */
 
-@font-face { font-family: "Outfit"; src: url("/assets/fonts/outfit-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: "Nunito Sans"; src: url("/assets/fonts/nunito-sans-var.woff2") format("woff2"); font-weight: 200 1000; font-style: normal; font-display: swap; }
 
 :root {

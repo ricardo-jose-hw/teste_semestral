@@ -1,5 +1,5 @@
 
-import "@fontsource/outfit/600.css";
+
 (function () {
   "use strict";
 
