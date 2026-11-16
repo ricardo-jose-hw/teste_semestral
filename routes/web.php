@@ -60,8 +60,11 @@ Route::middleware('auth')->group(function () {
     Route::get('consultas/{consulta}/edit', [ConsultaController::class, 'edit'])->name('consultas.edit');
     Route::put('consultas/{consulta}', [ConsultaController::class, 'update'])->name('consultas.update');
     Route::patch('consultas/{consulta}/status', [ConsultaController::class, 'status'])->name('consultas.status');
-
+      
     Route::get('exames', [ExameController::class, 'index'])->name('exames.index');
     Route::get('exames/create', [ExameController::class, 'create'])->name('exames.create');
     Route::post('exames', [ExameController::class, 'store'])->name('exames.store');
-});
+    Route::get('exames/{exame}/arquivo', [ExameController::class, 'arquivo'])->name('exames.arquivo');
+
+
+    });

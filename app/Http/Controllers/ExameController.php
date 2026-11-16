@@ -8,6 +8,7 @@ use App\Models\Exame;
 use App\Models\Pet;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -91,7 +92,7 @@ class ExameController extends Controller
             $extensao = $arquivo->getClientOriginalExtension();
             $nomeArquivo = Str::slug($nome).'-'.now()->format('YmdHis').'-'.Str::lower(Str::random(6)).'.'.$extensao;
 
-            $arquivo->move(public_path('uploads/exames'), $nomeArquivo);
+            Storage::disk('s3')->putFileAs('exames', $arquivo, $nomeArquivo);
 
             Exame::create([
                 'id_atendimento' => $consulta->id_atendimento,
@@ -105,5 +106,18 @@ class ExameController extends Controller
         return redirect()
             ->route('exames.index', ['pet_id' => $consulta->PET_id_pet])
             ->with('success', 'Exames anexados com sucesso.');
+    }
+
+    /**
+     */
+    public function arquivo(Exame $exame): RedirectResponse
+    {
+        $url = Storage::disk('s3')->temporaryUrl(
+            'exames/'.$exame->nm_arquivo,
+            now()->addMinutes(10),
+            ['ResponseContentDisposition' => 'inline; filename="'.$exame->nm_arquivo_original.'"']
+        );
+
+        return redirect()->away($url);
     }
 }

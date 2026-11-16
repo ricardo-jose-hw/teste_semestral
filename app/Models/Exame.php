@@ -18,6 +18,6 @@ class Exame extends Model
 
     public function urlArquivo(): string
     {
-        return asset('uploads/exames/'.$this->nm_arquivo);
+        return route('exames.arquivo', $this);
     }
 }
